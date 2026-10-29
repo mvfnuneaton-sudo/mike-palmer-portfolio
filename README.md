@@ -18,7 +18,7 @@ This is a static website; no database or build step is required.
 4. Once GitHub confirms publication, the default address is expected to be `https://mvfnuneaton-sudo.github.io/mike-palmer-portfolio/`.
 
 ## Custom domain
-The intended address is `me.mpdesk.com` **only if you own and can configure that domain**. In Pages settings, set the custom domain and update your DNS with the CNAME GitHub specifies. Do not assume ownership of `mpdesk.com` from `mpdesk.uk`.
+The custom domain is `mike.mpdesk.uk`. The `CNAME` file is committed; finish the GitHub Pages Settings and DNS record. In Pages settings, set the custom domain and update your DNS with the CNAME GitHub specifies. Do not assume ownership of `mpdesk.com` from `mpdesk.uk`.
 
 ## Privacy and content safeguards
 - FFN showcases use fictional demo details in their screenshots.
