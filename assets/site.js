@@ -162,6 +162,7 @@ if(skillsMenu){
 }
 document.querySelectorAll('.skills-intro-line span').forEach(el=>{if(el.textContent.includes('12'))el.textContent=el.textContent.replace('12','13')});
 const skillButtons=[...document.querySelectorAll('.skill-choice')];
+skillButtons.forEach((btn,index)=>{const number=btn.querySelector('span');if(number)number.textContent=String(index+1).padStart(2,'0');});
 const skillFields={title:document.getElementById('skillTitle'),claim:document.getElementById('skillClaim'),careerTitle:document.getElementById('skillCareerTitle'),career:document.getElementById('skillCareerText'),projectTitle:document.getElementById('skillProjectTitle'),project:document.getElementById('skillProjectText'),keywords:document.getElementById('skillKeywords'),link:document.getElementById('skillLink'),count:document.getElementById('skillCount')};
 skillButtons.forEach((btn,index)=>btn.addEventListener('click',()=>{
  const d=skillData[btn.dataset.skill];if(!d)return;
