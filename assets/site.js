@@ -255,6 +255,15 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
     ][i]||'',
     alt:button.dataset.alt
   }));
+  // Every frame has the same 2048×1008 canvas, fixed UI scale and crop.
+  const seamlessScreens=[
+    'assets/mffl-overview-seamless.webp',
+    'assets/mffl-matches-seamless.webp',
+    'assets/mffl-graphics-seamless.webp',
+    'assets/mffl-website-seamless.webp'
+  ];
+  entries.forEach((entry,i)=>{if(seamlessScreens[i])entry.image=seamlessScreens[i]});
+  entries.forEach(entry=>{const preloaded=new Image();preloaded.src=entry.image});
   const tech=mffl.querySelector('.technical-build');
   const summary=mffl.querySelector('.case-summary');
   summary.innerHTML=`<div class="studio-overline"><b>02 / MFFL PORTAL</b><span>LEAGUE MANAGEMENT / DATA / PUBLISHING</span></div>
@@ -272,7 +281,18 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   const image=gallery.querySelector('.studio-screen img'),title=gallery.querySelector('.studio-screen-title'),desc=gallery.querySelector('.studio-screen-description');
   const tabs=[...gallery.querySelectorAll('[data-showcase-index]')];
   let index=0,visible=false,userHoldUntil=0;
-  function select(i,user=false){if(!entries[i])return;index=i;image.src=entries[i].image;image.alt=entries[i].alt||entries[i].title;title.textContent='0'+(i+1)+' / '+entries[i].title.toUpperCase();desc.textContent=entries[i].description;tabs.forEach((b,j)=>{b.classList.toggle('active',i===j);b.setAttribute('aria-pressed',String(i===j));});if(user)userHoldUntil=Date.now()+18000;}
+  function select(i,user=false){
+   if(!entries[i])return;
+   index=i;
+   // Keep the laptop shell fixed while each identically sized screen fades in.
+   const next=entries[i];
+   image.classList.add('changing');
+   window.setTimeout(()=>{image.src=next.image;image.alt=next.alt||next.title;image.classList.remove('changing');},110);
+   title.textContent='0'+(i+1)+' / '+next.title.toUpperCase();
+   desc.textContent=next.description;
+   tabs.forEach((b,j)=>{b.classList.toggle('active',i===j);b.setAttribute('aria-pressed',String(i===j));});
+   if(user)userHoldUntil=Date.now()+18000;
+  }
   tabs.forEach((b,i)=>b.addEventListener('click',()=>select(i,true)));
   if('IntersectionObserver' in window){new IntersectionObserver(es=>{visible=es.some(e=>e.isIntersecting)},{threshold:.25}).observe(gallery)}else visible=true;
   const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
