@@ -30,3 +30,8 @@ The custom domain is `mike.mpdesk.uk`. The `CNAME` file is committed; finish the
 ## Editing
 Change the copy in `index.html`, appearance in `assets/styles.css`, and interactive behaviour in `assets/site.js`. The page includes self-contained demonstration images and a career-profile PDF so it can be hosted without additional media files.
 
+
+## V9 product showcases
+- MFFL: navy/red product section with a consistent laptop-style walkthrough, manually selectable screens and automatic transitions when in view.
+- MP Desk: dark graphite/amber product section with interactive Product Master, Performance and Vendor Rebates *representative interfaces*. All sample data are fictional; no real employer dashboards or financial figures are published.
+- The original FFN showcase remains unchanged. Both project sections retain their technical capability deep dives.
