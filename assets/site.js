@@ -23,8 +23,8 @@ const skillData = {
     "claim": "Find the friction before designing the fix.",
     "careerTitle": "Pyramid · B2B order mapping",
     "career": "Redesigned customer-order flows, with reusable mappings across around 40% of accounts and all key accounts in a 1,000+ customer base.",
-    "projectTitle": "FFN · One connected experience",
-    "project": "Brought availability, payments and statistics into a unified club workflow instead of several manual processes.",
+    "projectTitle": "FFN · Connected member records and payments",
+    "project": "Replaced disconnected availability, spreadsheet statistics and payment tracking with linked member records, integrated Stripe payments and one club workflow.",
     "keywords": "PROCESS MAPPING / EXCEPTION HANDLING / DELIVERY",
     "link": "#project-ffn"
   },
@@ -43,10 +43,10 @@ const skillData = {
     "claim": "Understand how information moves between tools and what must happen next.",
     "careerTitle": "Nemesis Now · Faire & Wayfair",
     "career": "Worked through marketplace API stock feeds, order retrieval and the operational handover required to make new channels work.",
-    "projectTitle": "MFFL · Connected website",
-    "project": "Used a shared data source and read-only public feed to connect league administration to public fixtures, results and statistics.",
-    "keywords": "REST / DATA FLOWS / MAPPING / CONNECTOR REQUIREMENTS",
-    "link": "#project-mffl"
+    "projectTitle": "FFN · Stripe and nutrition integrations",
+    "project": "Connected Stripe Checkout with signed webhook validation and reconciled payments, plus barcode scanning against the Open Food Facts API and a local nutrition catalogue.",
+    "keywords": "REST APIs / STRIPE WEBHOOKS / THIRD-PARTY DATA / CACHING",
+    "link": "#project-ffn"
   },
   "edi": {
     "title": "EDI & VENDOR FLOWS",
@@ -64,7 +64,7 @@ const skillData = {
     "careerTitle": "Pyramid · Linnworks",
     "career": "Personally evaluated and selected Linnworks to help consolidate DTC and marketplace trading workflows.",
     "projectTitle": "MFFL · Operations platform",
-    "project": "Connected registrations, squad eligibility, fixture control and public publishing within a consistent portal.",
+    "project": "Modelled league operations in a shared MySQL database linking registrations, team eligibility, fixture control and read-only public publishing.",
     "keywords": "PLATFORM EVALUATION / ARCHITECTURE / ROLE-BASED WORKFLOWS",
     "link": "#project-mffl"
   },
@@ -74,7 +74,7 @@ const skillData = {
     "careerTitle": "Pyramid · International order routing",
     "career": "Introduced reusable order mappings and standardised workflows so teams did less interpretation by hand.",
     "projectTitle": "MFFL · Content and results",
-    "project": "Linked confirmed results to league data and automated graphics output instead of recreating assets manually.",
+    "project": "Connected confirmed fixture results to live league data and an automated graphics hub for 1:1 posts and 9:16 story assets.",
     "keywords": "BUSINESS RULES / MAPPINGS / REPEATABILITY / EXCEPTIONS",
     "link": "#project-mffl"
   },
@@ -84,7 +84,7 @@ const skillData = {
     "careerTitle": "Nemesis Now · Marketplace performance",
     "career": "Work across performance, product data, Vendor rebates, channel mix and forecasting, including the reporting gaps that affect decisions.",
     "projectTitle": "MP Desk · Product master and insights",
-    "project": "Joined product reference data, marketplace performance and financial views into a consistent workspace.",
+    "project": "Designed SKU-based product master joins, channel performance reporting and imported Vendor rebate data inside a shared operational workspace.",
     "keywords": "PRODUCT MASTER / SQL / REPORTING / VISUALISATION",
     "link": "#project-mpdesk"
   },
@@ -139,6 +139,28 @@ const skillData = {
     "link": "#lab"
   }
 };
+// Payment workflows are a distinct, evidenced technical capability.
+skillData.payments = {"title": "PAYMENT APIs & WEBHOOKS",
+    "claim": "Design transactions as reliable business processes, not just payment buttons.",
+    "careerTitle": "Pyramid · Digital checkout and payments",
+    "career": "Improved B2B online payment journeys and worked through card and PayPal checkout issues affecting customers and the team.",
+    "projectTitle": "FFN · Stripe integration",
+    "project": "Delivered a unified Stripe Checkout flow with signed webhook verification, reconciliation against underlying member ledgers and source-aware allocation of payments.",
+    "keywords": "STRIPE CHECKOUT / WEBHOOK SIGNATURES / EVENT RECONCILIATION / LEDGERS",
+    "link": "#project-ffn"
+  };
+const skillsMenu=document.querySelector('.skill-menu');
+if(skillsMenu){
+  const paymentButton=document.createElement('button');
+  paymentButton.type='button';
+  paymentButton.className='skill-choice';
+  paymentButton.dataset.skill='payments';
+  paymentButton.setAttribute('aria-pressed','false');
+  paymentButton.innerHTML='<span>13</span><strong>Payments &amp; webhooks</strong><small>INTEGRATIONS</small><i aria-hidden="true">↗</i>';
+  const after=skillsMenu.querySelector('[data-skill="api"]');
+  if(after)after.insertAdjacentElement('afterend',paymentButton);else skillsMenu.appendChild(paymentButton);
+}
+document.querySelectorAll('.skills-intro-line span').forEach(el=>{if(el.textContent.includes('12'))el.textContent=el.textContent.replace('12','13')});
 const skillButtons=[...document.querySelectorAll('.skill-choice')];
 const skillFields={title:document.getElementById('skillTitle'),claim:document.getElementById('skillClaim'),careerTitle:document.getElementById('skillCareerTitle'),career:document.getElementById('skillCareerText'),projectTitle:document.getElementById('skillProjectTitle'),project:document.getElementById('skillProjectText'),keywords:document.getElementById('skillKeywords'),link:document.getElementById('skillLink'),count:document.getElementById('skillCount')};
 skillButtons.forEach((btn,index)=>btn.addEventListener('click',()=>{
@@ -152,7 +174,7 @@ skillButtons.forEach((btn,index)=>btn.addEventListener('click',()=>{
  skillFields.project.textContent=d.project;
  skillFields.keywords.textContent=d.keywords;
  skillFields.link.href=d.link;
- skillFields.count.textContent=String(index+1).padStart(2,'0')+' / 12';
+ skillFields.count.textContent=String(index+1).padStart(2,'0')+' / 13';
 }));
 
 if(skillButtons.length) skillButtons[0].click();
@@ -163,3 +185,52 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
  const choice=document.querySelector('.skill-choice[data-skill="'+anchor.dataset.skillLink+'"]');
  if(choice)choice.click();
 }));
+
+
+(function addTechnicalEvidence(){
+ const specs=[{"id":"project-ffn","type":"FFN / TECHNOLOGY BEHIND THE APP","heading":"THE INTEGRATIONS BEHIND THE EXPERIENCE.","desc":"A unified app is the result. The interesting part is the data, payments, interfaces and external services that make it work.","items":[["PAYMENTS · STRIPE","Stripe Checkout + verified webhooks","A single checkout for club charges. Stripe events are signature-verified, reconciled and allocated against 11-a-side, Weekly and shop ledgers.","STRIPE API","WEBHOOKS","LEDGER LOGIC","payments"],["NUTRITION · EXTERNAL DATA","Barcode scanning + Open Food Facts","Camera-based barcode reading with ZXing; packaged foods are retrieved through the Open Food Facts API, normalised and cached locally.","ZXING","REST API","LOCAL CACHE","api"],["NUTRITION · DATA MODEL","UK CoFID dataset + personal food history","A normalised nutrition dataset alongside sourced-product caching, personal serving corrections and diary entries, without overwriting shared records.","CoFID","DATA MODEL","SQL","data"],["PLATFORM · DATABASE","One linked member system","MariaDB-backed member records connect 11-a-side, Weekly and admin workflows, with access controls shaped around different roles.","MARIADB","ROLE-BASED ACCESS","WORKFLOWS","platforms"],["AUTOMATION · INSIGHT","Tracking data into usable outputs","Weight, attendance and football data support progress dashboards and generated club graphics — less copying between spreadsheets.","REPORTING","VISUALISATION","AUTOMATION","automation"]]},{"id":"project-mffl","type":"MFFL / LEAGUE SYSTEMS","heading":"FROM COMPLEX RULES TO CONNECTED SYSTEMS.","desc":"Underneath the public site is a database-led operations platform handling league rules, permissions, publishing and communications.","items":[["DATABASE · OPERATIONS","MySQL league data model","Clubs, team squads, registrations, fixtures and returns flow through one central record system instead of disconnected admin files.","MYSQL","RELATIONAL DATA","SYSTEM DESIGN","platforms"],["BUSINESS LOGIC · ELIGIBILITY","Rules built into workflows","Eligibility checks, player movement, cup-tie restrictions and suspensions are treated as operational rules — not manual memory tests.","RULE ENGINES","VALIDATION","EXCEPTIONS","automation"],["PUBLIC CONNECTIVITY","Administration to website feed","Approved and confirmed league information powers public fixtures, tables and statistics via a controlled read-only data flow.","DATA FEEDS","PUBLIC SITE","INTEGRATION","api"],["CONTENT AUTOMATION","Automated graphics hub","Confirmed results feed downloadable social graphics and formatted exports, including 1:1 posts and 9:16 story formats.","GENERATED PNG","TEMPLATES","AUTOMATION","automation"]]},{"id":"project-mpdesk","type":"MP DESK / COMMERCIAL SYSTEMS","heading":"COMMERCIAL KNOW-HOW, BUILT INTO DATA PRODUCTS.","desc":"A connected marketplace workspace shaped around operational decisions, with public-safe descriptions of the systems thinking involved.","items":[["DATA · PRODUCT MODEL","SKU-linked product master","Multiple catalogue and stock sources are matched by SKU so product information can be searched, compared and reused across workflows.","DATA MAPPING","SKU MATCHING","PRODUCT MASTER","data"],["REPORTING · COMMERCIAL","Cross-channel performance views","Channel, product and unit-level information is modelled into dashboards that answer real commercial questions.","METRICS","SQL","VISUALISATION","strategy"],["FINANCE · OPERATIONS","Vendor rebates and deductions","Imported rebate records support category analysis, prior-year comparison and line-level examination of deductions.","DATA IMPORTS","RECONCILIATION","ANALYSIS","data"],["WORKFLOWS · UI/UX","Warehouse returns capture","Barcode-driven receipts, damage photos, exceptions and status changes are designed around how the warehouse actually works.","BARCODES","IMAGE CAPTURE","PROCESS DESIGN","ux"]]}];
+ const escapeText=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ for(const spec of specs){
+  const caseEl=document.getElementById(spec.id);
+  if(!caseEl||caseEl.querySelector('.technical-build'))continue;
+  const section=document.createElement('section');
+  section.className='technical-build';
+  section.setAttribute('aria-label',spec.type);
+  section.innerHTML='<div class="tech-head"><div><p class="tech-eyebrow">'+escapeText(spec.type)+'</p><h4>'+escapeText(spec.heading)+'</h4></div><p>'+escapeText(spec.desc)+'</p></div>'+
+   '<div class="tech-grid">'+spec.items.map((item,index)=>
+      '<article class="tech-item"><div class="tech-item-top"><span>'+escapeText(String(index+1).padStart(2,'0'))+'</span><small>'+escapeText(item[0])+'</small></div>'+
+      '<h5>'+escapeText(item[1])+'</h5><p>'+escapeText(item[2])+'</p>'+
+      '<div class="tech-item-bottom">'+item.slice(3,6).map(tag=>'<span>'+escapeText(tag)+'</span>').join('')+'</div>'+
+      '<a href="#skills" data-evidence-skill="'+escapeText(item[6])+'">See supporting skills ↗</a></article>'
+   ).join('')+'</div>';
+  caseEl.appendChild(section);
+ }
+ document.querySelectorAll('[data-evidence-skill]').forEach(link=>link.addEventListener('click',()=>{
+  const btn=document.querySelector('.skill-choice[data-skill="'+link.dataset.evidenceSkill+'"]');
+  if(btn)btn.click();
+ }));
+})();
+
+// MFFL: auto-advance inside the desktop frame while in view. Manual controls always take priority.
+(function animateMfflShowcase(){
+ const gallery=document.querySelector('[data-gallery="mffl"]');
+ if(!gallery || !('IntersectionObserver' in window))return;
+ const buttons=[...gallery.querySelectorAll('.thumbs button')];
+ if(buttons.length<2)return;
+ let visible=false,paused=false,lastManual=0;
+ const io=new IntersectionObserver(es=>{visible=es.some(e=>e.isIntersecting);},{threshold:.3});
+ io.observe(gallery);
+ gallery.addEventListener('mouseenter',()=>paused=true);
+ gallery.addEventListener('mouseleave',()=>paused=false);
+ gallery.addEventListener('focusin',()=>paused=true);
+ gallery.addEventListener('focusout',()=>paused=false);
+ buttons.forEach(b=>b.addEventListener('click',()=>lastManual=Date.now()));
+ if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ window.setInterval(()=>{
+  if(!visible||paused||document.hidden||Date.now()-lastManual<12000)return;
+  const active=buttons.findIndex(b=>b.classList.contains('active'));
+  const next=buttons[(active+1)%buttons.length];
+  next.click();
+  lastManual=0; // automated navigation does not start the manual override pause
+ },5200);
+})();
