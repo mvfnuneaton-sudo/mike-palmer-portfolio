@@ -235,3 +235,79 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   lastManual=0; // automated navigation does not start the manual override pause
  },5200);
 })();
+
+
+/* V9 — two intentionally art-directed showcase systems, not pasted screenshots. */
+(function rebuildShowcases(){
+ const htmlEscape=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ const mffl=document.getElementById('project-mffl');
+ if(mffl && !mffl.dataset.rebuilt){
+  mffl.dataset.rebuilt='true';
+  const original=mffl.querySelector('[data-gallery="mffl"]');
+  const entries=[...original.querySelectorAll('.thumbs button')].map((button,i)=>({
+    image:button.dataset.image,
+    title:['League control centre','Match control','Graphics hub','Public website'][i]||button.textContent.trim(),
+    description:[
+      'A single view of teams, registrations, fixtures and league operations.',
+      'Confirmed fixtures, returns and match results in a controlled workflow.',
+      'Results and competition data turned into ready-to-publish social assets.',
+      'Public league content powered by the same central data source.'
+    ][i]||'',
+    alt:button.dataset.alt
+  }));
+  const tech=mffl.querySelector('.technical-build');
+  const summary=mffl.querySelector('.case-summary');
+  summary.innerHTML=`<div class="studio-overline"><b>02 / MFFL PORTAL</b><span>LEAGUE MANAGEMENT / DATA / PUBLISHING</span></div>
+   <div class="studio-title-grid"><div><h3>THE LEAGUE.<br><em>UNDER CONTROL.</em></h3><p class="studio-description">One connected platform built around the people who run and play in the league — from player registration and eligibility to match control, public data and social publishing.</p></div>
+   <div class="studio-number"><span>ONE SOURCE OF TRUTH</span><strong>ADMIN → PITCH → PUBLIC</strong><p>League operations and content, working from the same records.</p></div></div>
+   <div class="studio-story"><div><b>THE CHALLENGE</b><p>Different teams, competitions and rules — too many manual checks and disconnected workflows.</p></div><div><b>THE RESPONSE</b><p>Model the rules in the system, give each user the right controls and let approved data power the outputs.</p></div><div><b>WHAT I DID</b><p>Mapped operational requirements, designed workflows and interfaces, and connected the data to the public website and graphics hub.</p></div></div>`;
+  const gallery=document.createElement('div');
+  gallery.className='studio-gallery studio-gallery-mffl';
+  gallery.setAttribute('aria-label','MFFL product walkthrough');
+  gallery.innerHTML=`<div class="studio-gallery-top"><span><i class="live-dot"></i> PRODUCT WALKTHROUGH</span><span>04 CONNECTED EXPERIENCES</span></div>
+   <div class="studio-laptop"><div class="studio-screen"><img src="${entries[0]?.image||''}" alt="${htmlEscape(entries[0]?.alt||'MFFL platform')}"></div><div class="studio-screen-foot"><strong class="studio-screen-title">01 / ${entries[0]?.title.toUpperCase()||'OVERVIEW'}</strong><span>REAL MFFL INTERFACE · DEMO DETAILS</span></div></div><div class="studio-laptop-base"><span></span></div>
+   <div class="studio-controls" role="group" aria-label="Choose an MFFL screen">${entries.map((e,i)=>`<button type="button" aria-pressed="${i===0}" class="studio-tab ${i===0?'active':''}" data-showcase-index="${i}"><small>0${i+1}</small><span>${htmlEscape(e.title)}</span></button>`).join('')}</div>
+   <p class="studio-screen-description" aria-live="polite">${htmlEscape(entries[0]?.description||'')}</p>`;
+  original.replaceWith(gallery);
+  const image=gallery.querySelector('.studio-screen img'),title=gallery.querySelector('.studio-screen-title'),desc=gallery.querySelector('.studio-screen-description');
+  const tabs=[...gallery.querySelectorAll('[data-showcase-index]')];
+  let index=0,visible=false,userHoldUntil=0;
+  function select(i,user=false){if(!entries[i])return;index=i;image.src=entries[i].image;image.alt=entries[i].alt||entries[i].title;title.textContent='0'+(i+1)+' / '+entries[i].title.toUpperCase();desc.textContent=entries[i].description;tabs.forEach((b,j)=>{b.classList.toggle('active',i===j);b.setAttribute('aria-pressed',String(i===j));});if(user)userHoldUntil=Date.now()+18000;}
+  tabs.forEach((b,i)=>b.addEventListener('click',()=>select(i,true)));
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{visible=es.some(e=>e.isIntersecting)},{threshold:.25}).observe(gallery)}else visible=true;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){window.setInterval(()=>{if(visible&&!document.hidden&&Date.now()>userHoldUntil&&!gallery.matches(':hover')&&!gallery.matches(':focus-within'))select((index+1)%entries.length);},6500)}
+  if(tech)mffl.appendChild(tech);
+ }
+ const mpdesk=document.getElementById('project-mpdesk');
+ if(mpdesk && !mpdesk.dataset.rebuilt){
+  mpdesk.dataset.rebuilt='true';
+  const summary=mpdesk.querySelector('.case-summary');
+  const oldGallery=mpdesk.querySelector('.screen-gallery');
+  const tech=mpdesk.querySelector('.technical-build');
+  summary.innerHTML=`<div class="studio-overline"><b>03 / MP DESK</b><span>MARKETPLACE SYSTEMS / DATA / DECISION SUPPORT</span></div>
+    <div class="studio-title-grid"><div><h3>COMPLEX DATA.<br><em>CLEAR DECISIONS.</em></h3><p class="studio-description">A purpose-built workspace designed around the real demands of marketplace management — connecting product data, performance and operational workflows instead of making people chase spreadsheets.</p></div>
+    <div class="studio-number"><span>COMMERCIAL SYSTEMS</span><strong>PRODUCT → CHANNEL → ACTION</strong><p>Good data is only useful when it helps somebody decide what to do next.</p></div></div>
+    <div class="studio-story"><div><b>THE CHALLENGE</b><p>Catalogue information, channel performance and financial deductions spread across multiple sources.</p></div><div><b>THE RESPONSE</b><p>Bring those sources into usable views, with clear business logic and consistent data structures.</p></div><div><b>WHAT I DID</b><p>Defined the product and reporting models, designed the workflows and created a coherent operational UI.</p></div></div>`;
+  const gallery=document.createElement('div');gallery.className='studio-gallery studio-gallery-mpdesk';gallery.setAttribute('aria-label','MP Desk representative interface demo');
+  gallery.innerHTML=`<div class="studio-gallery-top"><span><i class="live-dot"></i> PLATFORM WALKTHROUGH</span><span>FICTIONAL SAMPLE DATA · NO EMPLOYER RECORDS</span></div>
+   <div class="studio-workspace"><div class="studio-browser-top"><span class="studio-browser-dots"><i></i><i></i><i></i></span><span>MPDesk <b> / Marketplace workspace</b></span><small>DEMO VIEW</small></div>
+     <div class="studio-app"><aside class="studio-app-sidebar"><div class="studio-app-logo">MP<span>Desk</span></div><p>WORKSPACE</p><div class="studio-app-link active">▦ &nbsp; Overview</div><div class="studio-app-link">▤ &nbsp; Products</div><div class="studio-app-link">◫ &nbsp; Performance</div><div class="studio-app-link">◇ &nbsp; Operations</div><p>DATA SOURCES</p><div class="studio-app-link">◈ &nbsp; Marketplaces</div><div class="studio-app-link">⌁ &nbsp; Imports</div></aside>
+      <div class="studio-app-content"><div class="studio-app-header"><div><small>MPDesk / <span id="studio-app-breadcrumb">Products</span></small><h4 id="studio-app-title">Product Master</h4><p id="studio-app-subtitle">Multiple sources. One searchable product view.</p></div><span class="studio-demo-pill">SAMPLE DATA</span></div>
+       <div id="studio-app-body" class="studio-app-body"></div>
+      </div></div>
+   </div></div>
+   <div class="studio-controls" role="group" aria-label="Choose an MP Desk view"><button class="studio-tab active" type="button" data-mpd-view="master" aria-pressed="true"><small>01</small><span>Product master</span></button><button class="studio-tab" type="button" data-mpd-view="performance" aria-pressed="false"><small>02</small><span>Performance</span></button><button class="studio-tab" type="button" data-mpd-view="rebates" aria-pressed="false"><small>03</small><span>Vendor rebates</span></button></div>
+   <p class="studio-screen-description" aria-live="polite">SKU-level product information linked across sources, presented with fictional sample data.</p>`;
+  if(oldGallery)oldGallery.replaceWith(gallery);else summary.insertAdjacentElement('afterend',gallery);
+  if(tech)mpdesk.appendChild(tech);
+  const views={
+   master:{breadcrumb:'Products',title:'Product Master',subtitle:'Multiple sources. One searchable product view.',description:'SKU-level product information linked across sources, presented with fictional sample data.',body:`<div class="studio-demo-summary"><div><small>CATALOGUE PRODUCTS</small><strong>1,248</strong><span>Reference catalogue</span></div><div><small>LIVE MARKETPLACE SKUS</small><strong>842</strong><span>Across sample channels</span></div><div><small>CONNECTED SOURCES</small><strong>03</strong><span>Joined by SKU</span></div></div><div class="studio-demo-table"><header><b>Products</b><span>Search by SKU or description</span></header><div class="studio-demo-tablehead"><span>SKU</span><span>PRODUCT</span><span>STOCK</span><span>CHANNEL</span></div><div class="studio-demo-row"><span>SKU-1024</span><b>Sample Collectible — 15 cm</b><em>In stock</em><small>Marketplace UK</small></div><div class="studio-demo-row"><span>SKU-1087</span><b>Decorative Figure — 22 cm</b><em>In stock</em><small>Marketplace US</small></div><div class="studio-demo-row"><span>SKU-1149</span><b>Seasonal Ornament — 8 cm</b><em>In stock</em><small>Retail Partner</small></div><div class="studio-demo-row"><span>SKU-1213</span><b>Miniature Gift Set — 12 cm</b><em>In stock</em><small>Marketplace UK</small></div></div>`},
+   performance:{breadcrumb:'Performance',title:'Product Performance',subtitle:'Channel and product insight in one workspace.',description:'Joined-up channel analytics, SKU reporting and contribution views using fictional metrics.',body:`<div class="studio-demo-summary"><div><small>DEMO REVENUE</small><strong>£184k</strong><span>Illustrative figure</span></div><div><small>UNITS</small><strong>8,640</strong><span>Fictional sample</span></div><div><small>CHANNELS</small><strong>03</strong><span>Sample split</span></div></div><div class="studio-demo-dual"><div class="studio-chart-card"><header><b>Top products by revenue</b><span>DEMO</span></header><div class="studio-bar-label">Figurine collection <span>£32k</span></div><div class="studio-bar"><i style="width:91%"></i></div><div class="studio-bar-label">Ornament range <span>£26k</span></div><div class="studio-bar"><i style="width:74%"></i></div><div class="studio-bar-label">Gift sets <span>£19k</span></div><div class="studio-bar"><i style="width:56%"></i></div><div class="studio-bar-label">Home accessories <span>£14k</span></div><div class="studio-bar"><i style="width:39%"></i></div></div><div class="studio-chart-card"><header><b>Channel contribution</b><span>DEMO</span></header><div class="studio-donut-row"><div class="studio-donut"><span>3<br><small>channels</small></span></div><div class="studio-donut-legend"><p><i></i>Marketplace UK</p><p><i></i>Marketplace US</p><p><i></i>Retail partners</p></div></div></div></div>`},
+   rebates:{breadcrumb:'Finance',title:'Vendor Rebates',subtitle:'Deduction visibility and year-on-year comparisons.',description:'Illustrative rebate categories, comparisons and deduction analysis — all data fictional.',body:`<div class="studio-demo-summary"><div><small>REBATE DOCUMENTS</small><strong>136</strong><span>Fictional records</span></div><div><small>PERIOD</small><strong>2026</strong><span>Demo reporting year</span></div><div><small>CATEGORIES</small><strong>06</strong><span>Normalised labels</span></div></div><div class="studio-demo-dual"><div class="studio-chart-card"><header><b>Monthly rebate comparison</b><span>DEMO</span></header><div class="studio-month-chart">${[25,41,32,55,40,47,64,59,44,69,50,76].map((n,i)=>`<div><span style="height:${n}%"></span><small>${'JFMAMJJASOND'[i]}</small></div>`).join('')}</div></div><div class="studio-chart-card"><header><b>Category breakdown</b><span>DEMO</span></header><div class="studio-bar-label">Marketing allowances <span>38%</span></div><div class="studio-bar"><i style="width:76%"></i></div><div class="studio-bar-label">Promotional support <span>31%</span></div><div class="studio-bar"><i style="width:62%"></i></div><div class="studio-bar-label">Damage allowances <span>18%</span></div><div class="studio-bar"><i style="width:36%"></i></div><div class="studio-bar-label">Other deductions <span>13%</span></div><div class="studio-bar"><i style="width:26%"></i></div></div></div>`}
+  };
+  function selectView(name){const d=views[name];if(!d)return;gallery.querySelector('#studio-app-breadcrumb').textContent=d.breadcrumb;gallery.querySelector('#studio-app-title').textContent=d.title;gallery.querySelector('#studio-app-subtitle').textContent=d.subtitle;gallery.querySelector('#studio-app-body').innerHTML=d.body;gallery.querySelector('.studio-screen-description').textContent=d.description;gallery.querySelectorAll('[data-mpd-view]').forEach(b=>{const selected=b.dataset.mpdView===name;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});}
+  gallery.querySelectorAll('[data-mpd-view]').forEach(b=>b.addEventListener('click',()=>selectView(b.dataset.mpdView)));
+  selectView('master');
+ }
+})();
