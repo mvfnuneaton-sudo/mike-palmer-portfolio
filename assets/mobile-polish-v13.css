@@ -1,0 +1,109 @@
+/* Demo controls stay hidden on desktop; revealed at the mobile breakpoints. */
+.mobile-demo-expand,.mobile-demo-switch{display:none}
+/* V13 – mobile experience QA: clear first impression, accessible controls, usable demos. */
+@media (max-width:800px){
+  html{scroll-padding-top:72px}
+  main section[id],#skills,#lab,#opportunities{scroll-margin-top:72px}
+  .mobile-header{min-height:64px;height:64px;padding-inline:16px;box-shadow:0 1px 0 rgba(10,20,50,.04)}
+  .mobile-header button{min-height:44px;min-width:68px;padding:10px 13px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .side-nav a{min-height:44px;display:flex;align-items:center;padding:10px 8px}
+  .sidebar{padding-bottom:max(22px,env(safe-area-inset-bottom,0px));overscroll-behavior:contain;max-height:100dvh}
+  .nav-shade{z-index:30}
+  .actions a,.actions button,.button-dark,.button-outline,.button-light,.inline-link,.profile-link{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  .section-head h2,.case h3,.hero h1{overflow-wrap:break-word}
+  .skill-choice{min-height:72px}
+  .skill-evidence{min-width:0}
+  .skill-evidence h3{overflow-wrap:anywhere}
+  .studio-gallery-top{gap:10px;flex-wrap:wrap}
+  .studio-story>div{min-width:0}
+  .tech-head h4{overflow-wrap:anywhere}
+  .tech-item{min-width:0}
+  .mobile-demo-expand{display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 14px;background:#fff;color:#151f34;border:1px solid rgba(255,255,255,.45);font:800 11px/1.25 Inter,Arial,sans-serif;letter-spacing:.02em;cursor:pointer;margin:10px 0 12px;border-radius:5px}
+  .case-mffl .mobile-demo-expand{background:#e62b43;color:#fff;border-color:#e62b43}
+  .case-mpdesk .mobile-demo-expand{background:#ff9b13;color:#101923;border-color:#ff9b13}
+  .mobile-demo-expand:focus-visible,.mobile-demo-switch button:focus-visible{outline:3px solid #79a7ff;outline-offset:2px}
+  body.mobile-demo-lock{overflow:hidden!important}
+  .studio-gallery-mffl.mobile-demo-expanded,.mpd-interactive.mobile-demo-expanded{position:fixed!important;inset:0!important;z-index:1200!important;overflow:hidden!important;margin:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;display:flex!important;flex-direction:column!important;padding:calc(8px + env(safe-area-inset-top,0px)) 8px calc(8px + env(safe-area-inset-bottom,0px))!important;border-radius:0!important}
+  .mobile-demo-expanded .studio-gallery-top{min-height:24px;flex:0 0 auto;padding:0 4px}
+  .mobile-demo-expanded .mobile-demo-expand{align-self:flex-end;margin:0 2px 8px;min-height:42px}
+  .studio-gallery-mffl.mobile-demo-expanded .studio-laptop{flex:1 1 auto!important;min-height:0!important;height:auto!important;margin:0 2px!important;display:flex;flex-direction:column}
+  .studio-gallery-mffl.mobile-demo-expanded .studio-screen{flex:1 1 auto!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  .studio-gallery-mffl.mobile-demo-expanded .mffl-demo{height:100%!important;min-height:0!important}
+  .studio-gallery-mffl.mobile-demo-expanded .studio-laptop-base{flex:0 0 11px}
+  .studio-gallery-mffl.mobile-demo-expanded .studio-screen-foot{flex:0 0 auto}
+  .studio-gallery-mffl.mobile-demo-expanded .mffl-demo-main{overscroll-behavior:contain}
+  .mpd-interactive.mobile-demo-expanded .mpd-ipad{flex:1 1 auto!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;margin:0!important;border-width:6px!important;border-radius:16px!important}
+  .mpd-interactive.mobile-demo-expanded .mpd-glass{height:100%!important;border-radius:9px!important}
+  .mpd-interactive.mobile-demo-expanded .mpd-scroll{min-height:0!important;overscroll-behavior:contain}
+  .mpd-interactive.mobile-demo-expanded .mpd-under{display:none}
+  .mpd-interactive.mobile-demo-expanded .mpd-navlink{min-height:43px;padding:12px 10px;font-size:11px}
+  .mpd-interactive.mobile-demo-expanded .mpd-sidebar{height:52px;flex:0 0 52px}
+  .mpd-interactive.mobile-demo-expanded .mpd-topbar{height:52px;flex:0 0 52px}
+  .mpd-interactive.mobile-demo-expanded .mpd-topbar strong{font-size:15px}
+  .mpd-interactive.mobile-demo-expanded .mpd-pagehead h5{font-size:23px}
+  .mpd-interactive.mobile-demo-expanded .mpd-pagehead p{font-size:11px}
+  .mpd-interactive.mobile-demo-expanded .mpd-table-row b,.mpd-interactive.mobile-demo-expanded .mpd-table-row{font-size:11px}
+  .mpd-interactive.mobile-demo-expanded .mpd-filter-row input,.mpd-interactive.mobile-demo-expanded .mpd-filter-row select{font-size:14px;min-height:42px}
+  .mpd-interactive.mobile-demo-expanded .mpd-primary{min-height:44px;font-size:12px}
+  .mpd-interactive.mobile-demo-expanded .mpd-table-row{min-height:48px}
+}
+@media (max-width:600px){
+  .hero-layout{display:flex!important;flex-direction:column!important;gap:22px!important}
+  .hero-left{order:0!important}
+  .hero-photo{order:1!important;height:260px!important;min-height:0!important;max-height:none!important;width:100%!important;margin:0!important}
+  .hero h1{font-size:clamp(58px,17.5vw,82px)!important;line-height:.88!important;letter-spacing:-.035em!important}
+  .hero-statement{font-size:clamp(22px,6vw,27px)!important;line-height:1.17}
+  .hero-copy{font-size:15px;line-height:1.65}
+  .hero-eyebrow{margin:18px 0 15px}
+  .hero-strip{margin-top:20px}
+  .section{padding-top:50px;padding-bottom:54px}
+  .content{padding-left:18px;padding-right:18px}
+  .section-head h2{font-size:clamp(42px,12vw,61px);line-height:.96}
+  .case-summary{padding:25px 18px}
+  .case-mffl .case-summary,.case-mpdesk .case-summary{padding:28px 18px 24px}
+  .case-mffl .studio-title-grid h3,.case-mpdesk .studio-title-grid h3{font-size:clamp(46px,12vw,66px);line-height:.95}
+  .studio-overline{flex-wrap:wrap;gap:8px}
+  .studio-overline>span{max-width:none}
+  .studio-story{gap:15px}
+  .technical-build{padding:24px 16px}
+  .tech-head h4{font-size:clamp(36px,10.5vw,45px)}
+  #skillExplorer .skill-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #skillExplorer .skill-choice{min-height:88px;padding:13px 11px}
+  #skillExplorer .skill-choice strong{font-size:12px;line-height:1.2}
+  .case-ffn .ffn-dual{padding:26px 14px 30px}
+  .ffn-dual-header h4{font-size:clamp(36px,10.5vw,48px)}
+  .mobile-demo-switch{display:grid!important;grid-template-columns:1fr 1fr;gap:7px;margin:13px auto 22px;max-width:350px;width:100%;padding:5px;background:#25171b;border:1px solid #56353d;border-radius:11px}
+  .mobile-demo-switch button{border:0;border-radius:8px;background:transparent;color:#decdd0;min-height:44px;font:800 12px/1.2 Inter,Arial,sans-serif;cursor:pointer}
+  .mobile-demo-switch button[aria-pressed="true"]{background:#f0002b;color:white}
+  .ffn-dual[data-mobile-view="player"] .ffn-dual-column:nth-child(2),
+  .ffn-dual[data-mobile-view="admin"] .ffn-dual-column:nth-child(1){display:none!important}
+  .ffn-dual-devices{max-width:none;width:100%;display:block!important}
+  .ffn-dual-column{width:100%;max-width:390px;margin:0 auto}
+  .ffn-dual-phone{width:min(100%,350px);height:min(670px,76dvh);min-height:520px}
+  .ffn-dual-device-label{width:min(100%,350px)}
+  .ffn-dual-bottom{flex-basis:58px}
+  .ffn-dual-bottom button{min-height:48px;font-size:10px}
+  .ffn-dual-bottom button span{font-size:15px}
+  .ffn-dual-phone .ffn-btn{min-height:40px}
+  .ffn-dual-phone .ffn-btn.tiny{min-height:38px;padding:8px 10px}
+  .ffn-dual-phone .ffn-filter button{min-height:38px}
+  .ffn-dual-phone .ffn-form input,.ffn-dual-phone .ffn-form select{min-height:44px;font-size:16px}
+  .mffl-demo-mobile-nav button{min-height:40px!important;padding:10px 13px!important;font-size:11px!important}
+  .mffl-demo-mobile-nav{min-height:44px!important;max-height:44px!important}
+  .mffl-interactive-gallery .studio-laptop{max-width:100%}
+  .mpd-interactive .mpd-navigation .mpd-navlink{min-height:38px;font-size:10px}
+  .mpd-interactive .mpd-filter-row input,.mpd-interactive .mpd-filter-row select{min-height:38px}
+}
+@media (max-width:360px){
+  .content{padding-left:15px;padding-right:15px}
+  .hero h1{font-size:clamp(56px,17vw,66px)!important}
+  .hero-photo{height:220px!important}
+  .mobile-header{padding-inline:12px}
+  .skill-evidence{padding:20px 16px}
+  #skillExplorer .skill-choice strong{font-size:11px}
+  .ffn-dual-phone{height:570px;min-height:500px}
+  .case-mffl .studio-title-grid h3,.case-mpdesk .studio-title-grid h3{font-size:clamp(41px,11.5vw,52px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .sidebar,.tech-item,.ffn-dual-phone *,.studio-screen img{transition:none!important;animation:none!important}
+}
