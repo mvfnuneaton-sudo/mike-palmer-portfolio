@@ -505,3 +505,13 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   js.defer=true;
   document.body.appendChild(js);
 })();
+
+/* V13 mobile-first polish: responsive navigation and immersive demo controls. */
+(function loadMobilePolish(){
+  const style=document.createElement('link');
+  style.rel='stylesheet';style.href='assets/mobile-polish-v13.css?v=13';
+  document.head.appendChild(style);
+  const script=document.createElement('script');
+  script.src='assets/mobile-polish-v13.js?v=13';script.defer=true;
+  document.body.appendChild(script);
+})();
