@@ -478,3 +478,17 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   });
   render();
 })();
+
+
+/* MFFL V11 interactive portal — load after the original case-study scaffold exists. */
+(function loadMfflInteractive(){
+  if(!document.getElementById('project-mffl'))return;
+  const css=document.createElement('link');
+  css.rel='stylesheet';
+  css.href='assets/mffl-demo.css?v=11';
+  document.head.appendChild(css);
+  const js=document.createElement('script');
+  js.src='assets/mffl-demo.js?v=11';
+  js.defer=true;
+  document.body.appendChild(js);
+})();
