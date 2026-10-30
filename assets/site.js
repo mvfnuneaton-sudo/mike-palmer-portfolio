@@ -331,3 +331,150 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   selectView('master');
  }
 })();
+
+/* V10 - MP Desk: fully interactive, privacy-safe iPad demonstration */
+(function buildMpDeskTabletDemo(){
+  const root=document.getElementById('project-mpdesk');
+  if(!root) return;
+  const old=root.querySelector('.studio-gallery-mpdesk');
+  if(!old || root.querySelector('.mpd-ipad')) return;
+  const data={
+    products:[
+      {sku:'DEMO-1024',name:'Arcane Bookend — 18cm',category:'Figurines',channel:'Amazon UK',stock:384,price:29.99,status:'Live'},
+      {sku:'DEMO-1087',name:'Dragon Collectible — 22cm',category:'Collectibles',channel:'Amazon US',stock:168,price:39.99,status:'Live'},
+      {sku:'DEMO-1149',name:'Moonlight Ornament — 8cm',category:'Ornaments',channel:'Wayfair',stock:89,price:14.99,status:'Live'},
+      {sku:'DEMO-1213',name:'Vintage Keepsake Box',category:'Homeware',channel:'Faire',stock:12,price:24.99,status:'Low stock'},
+      {sku:'DEMO-1312',name:'Fantasy Journal Set',category:'Stationery',channel:'Amazon UK',stock:247,price:19.99,status:'Live'},
+      {sku:'DEMO-1407',name:'Miniature Castle Globe',category:'Collectibles',channel:'Amazon US',stock:0,price:34.99,status:'Out of stock'}
+    ],
+    rebates:[
+      {id:'RB-2026-0041',date:'28 Oct 2026',category:'Marketing',amount:3250.00,status:'Reconciled'},
+      {id:'RB-2026-0042',date:'20 Oct 2026',category:'Damage',amount:820.50,status:'Review'},
+      {id:'RB-2026-0043',date:'15 Oct 2026',category:'Promotions',amount:1475.25,status:'Reconciled'},
+      {id:'RB-2026-0044',date:'08 Oct 2026',category:'Marketing',amount:950.00,status:'Reconciled'}
+    ],
+    returns:[
+      {id:'RT-1025',date:'29 Oct',sku:'DEMO-1024',qty:2,reason:'Transit damage',status:'Pending review'},
+      {id:'RT-1024',date:'28 Oct',sku:'DEMO-1087',qty:1,reason:'Packaging damage',status:'Completed'},
+      {id:'RT-1023',date:'27 Oct',sku:'DEMO-1213',qty:3,reason:'Missing items',status:'In progress'}
+    ],
+    channels:[{name:'Amazon Vendor UK',key:'Amazon',type:'EDI / Vendor',units:'4,210',share:61},{name:'Amazon Seller US',key:'Amazon',type:'Seller / FBA',units:'1,690',share:24},{name:'Wayfair',key:'Wayfair',type:'Marketplace API',units:'620',share:9},{name:'Faire',key:'Faire',type:'Wholesale API',units:'410',share:6}]
+  };
+  const state={view:'overview',query:'',channel:'All channels',rebateCategory:'All categories',returnStatus:'All statuses',period:'YTD 2026',detail:null,syncs:0};
+  const nav=[
+    {group:'WORKSPACE',links:[['overview','Overview','▦'],['products','Product Master','▤'],['performance','Performance','▥'],['rebates','Vendor Rebates','▣']]},
+    {group:'OPERATIONS',links:[['returns','Amazon Returns','↺'],['channels','Marketplaces','▧'],['imports','Data Imports','⇄']]}
+  ];
+  const screen=document.createElement('div');
+  screen.className='studio-gallery studio-gallery-mpdesk mpd-interactive';
+  screen.setAttribute('aria-label','Interactive MP Desk product demonstration with fictional data');
+  screen.innerHTML=`
+  <div class="studio-gallery-top mpd-outside-head"><span><i class="live-dot"></i> EXPLORE THE PRODUCT</span><span>INTERACTIVE DEMO / FICTIONAL DATA</span></div>
+  <div class="mpd-ipad" role="region" aria-label="MP Desk iPad demonstration">
+    <div class="mpd-camera" aria-hidden="true"></div>
+    <div class="mpd-glass">
+      <div class="mpd-osbar"><span>9:41</span><span class="mpd-os-icons" aria-hidden="true">●●● ▰</span></div>
+      <div class="mpd-app">
+        <aside class="mpd-sidebar" aria-label="MP Desk demo navigation">
+          <div class="mpd-logo">MP<span>Desk</span><small>MARKETPLACE MANAGER</small></div>
+          <nav class="mpd-navigation">${nav.map(g=>`<div class="mpd-nav-group"><span class="mpd-nav-caption">${g.group}</span>${g.links.map(([id,label,ic])=>`<button type="button" class="mpd-navlink" data-mpd-nav="${id}" aria-current="false"><span class="mpd-nav-ic" aria-hidden="true">${ic}</span><span>${label}</span></button>`).join('')}</div>`).join('')}</nav>
+          <div class="mpd-user"><b>DEMO</b><span>Sample workspace</span></div>
+        </aside>
+        <div class="mpd-main">
+          <header class="mpd-topbar"><div><span class="mpd-breadcrumb">MPDesk / <span id="mpd-crumb">Overview</span></span><strong id="mpd-title">Workspace overview</strong></div><div class="mpd-top-actions"><span class="mpd-status-dot"></span> DEMO MODE</div></header>
+          <div class="mpd-scroll" id="mpd-content" tabindex="0" aria-live="polite"></div>
+          <div class="mpd-bottom"><span>All figures, products and activities are fictional</span><span>INTERACTIVE PORTFOLIO DEMO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mpd-under"><div><b>TRY IT YOURSELF</b><span>Use the iPad navigation, search products, open records and explore reports.</span></div><span class="mpd-no-backend">NO LIVE CONNECTIONS OR CUSTOMER DATA</span></div>`;
+  old.replaceWith(screen);
+  const content=screen.querySelector('#mpd-content');
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const money=n=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(n);
+  const pill=s=>`<span class="mpd-pill ${/Live|Completed|Reconciled/.test(s)?'good':/Low|Review|Pending|progress/.test(s)?'warn':'neutral'}">${esc(s)}</span>`;
+  const stats=items=>`<div class="mpd-kpis">${items.map(x=>`<article class="mpd-kpi"><small>${esc(x[0])}</small><strong>${esc(x[1])}</strong><span>${esc(x[2])}</span></article>`).join('')}</div>`;
+  const action=(view,text)=>`<button type="button" class="mpd-link" data-mpd-nav="${view}">${esc(text)} <span aria-hidden="true">↗</span></button>`;
+  const head=(eyebrow,title,subtitle)=>`<div class="mpd-pagehead"><div><span>${esc(eyebrow)}</span><h5>${esc(title)}</h5><p>${esc(subtitle)}</p></div></div>`;
+  const products=()=>{
+    const rows=data.products.filter(p=>(state.channel==='All channels'||p.channel===state.channel)&&[p.sku,p.name,p.category].join(' ').toLowerCase().includes(state.query.toLowerCase()));
+    return head('CATALOGUE / CONNECTED DATA','Product Master','Search an example multi-source catalogue and open a product record.')+
+      stats([['REFERENCE PRODUCTS','1,248','Catalogue feed'],['LIVE LISTINGS','842','Across sample channels'],['MAPPED SOURCES','03','Joined by SKU']])+
+      `<section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Product catalogue</strong><small>${rows.length} matching sample products</small></div><div class="mpd-filter-row"><label>Search products<input data-mpd-search="products" type="search" placeholder="Try dragon, SKU or ornament…" value="${esc(state.query)}"></label><label>Channel<select data-mpd-channel>${['All channels','Amazon UK','Amazon US','Wayfair','Faire'].map(c=>`<option ${state.channel===c?'selected':''}>${c}</option>`).join('')}</select></label></div><div class="mpd-table"><div class="mpd-table-head"><span>SKU / PRODUCT</span><span>CHANNEL</span><span>STOCK</span><span></span></div><div id="mpd-product-rows">${rows.length?rows.map(p=>`<button class="mpd-table-row" type="button" data-mpd-product="${esc(p.sku)}"><span><b>${esc(p.name)}</b><small>${esc(p.sku)} · ${esc(p.category)}</small></span><span>${esc(p.channel)}</span><span>${pill(p.status)}<small>${p.stock} units</small></span><span class="mpd-row-arrow">→</span></button>`).join(''):'<p class="mpd-empty">No matching products. Try a different search.</p>'}</div></div></section>`;
+  };
+  const overview=()=>head('WORKSPACE / OVERVIEW','Good morning.','One place for commercial activity, catalogue health and operational priorities.')+
+    stats([['CHANNEL REVENUE','£184,320','Illustrative YTD'],['ACTIVE SKUs','842','Across 4 marketplaces'],['ACTIONS TO REVIEW','07','Sample workflow queue']])+
+    `<div class="mpd-two"><section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Marketplace mix</strong>${action('performance','View performance')}</div>${data.channels.map(c=>`<div class="mpd-baritem"><div><b>${esc(c.name)}</b><span>${c.share}%</span></div><div class="mpd-bar-track"><i style="width:${c.share}%"></i></div></div>`).join('')}</section><section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Needs your attention</strong></div><div class="mpd-task"><b>3 return receipts</b><span>Pending warehouse review</span>${action('returns','Open returns')}</div><div class="mpd-task"><b>2 catalogue exceptions</b><span>Stock and listings to inspect</span>${action('products','Open products')}</div><div class="mpd-task"><b>Rebate analysis</b><span>Sample October documents</span>${action('rebates','Review deductions')}</div></section></div>`;
+  const performance=()=>head('INSIGHTS / PRODUCT PERFORMANCE','Product Performance','Change the reporting period and explore channel contribution.')+
+    `<div class="mpd-rightfilter"><label>Reporting period <select data-mpd-period><option ${state.period==='YTD 2026'?'selected':''}>YTD 2026</option><option ${state.period==='Q3 2026'?'selected':''}>Q3 2026</option></select></label></div>`+
+    stats(state.period==='YTD 2026'?[['DEMO REVENUE','£184,320','Year to date'],['UNITS SHIPPED','8,640','Fictional'],['CHANNELS','04','Connected sources']]:[['DEMO REVENUE','£59,810','Q3 sample'],['UNITS SHIPPED','2,740','Fictional'],['CHANNELS','04','Connected sources']])+
+    `<div class="mpd-two"><section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Top categories</strong><small>Revenue contribution</small></div>${[['Collectibles',84],['Ornaments',67],['Stationery',48],['Homeware',32]].map(([n,v])=>`<div class="mpd-baritem"><div><b>${n}</b><span>${v}% index</span></div><div class="mpd-bar-track"><i style="width:${v}%"></i></div></div>`).join('')}</section><section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Channel contribution</strong><small>Illustrative split</small></div><div class="mpd-ring-wrap"><div class="mpd-ring"><span>4<small>CHANNELS</small></span></div><div>${data.channels.map(c=>`<div class="mpd-legend-row"><span>${esc(c.name)}</span><b>${c.share}%</b></div>`).join('')}</div></div></section></div>`;
+  const rebates=()=>{
+    const rows=data.rebates.filter(r=>state.rebateCategory==='All categories'||r.category===state.rebateCategory);
+    return head('FINANCE / AMAZON VENDOR','Vendor Rebates','Filter illustrative deduction records and inspect their details.')+
+    stats([['DOCUMENTS','136','Sample data set'],['NET REBATES','£29,610','Fictional amount'],['REVIEW QUEUE','01','Example exception']])+
+    `<section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Rebate lines</strong><small>${rows.length} matching example records</small></div><div class="mpd-filter-row"><label>Category<select data-mpd-rebate-filter>${['All categories','Marketing','Damage','Promotions'].map(c=>`<option ${c===state.rebateCategory?'selected':''}>${c}</option>`).join('')}</select></label></div><div class="mpd-table"><div class="mpd-table-head"><span>DOCUMENT</span><span>CATEGORY</span><span>AMOUNT</span><span></span></div>${rows.map(r=>`<button class="mpd-table-row" data-mpd-rebate="${r.id}" type="button"><span><b>${r.id}</b><small>${r.date}</small></span><span>${r.category}</span><span><b>${money(r.amount)}</b><small>${r.status}</small></span><span class="mpd-row-arrow">→</span></button>`).join('')}</div></section>`;
+  };
+  const returns=()=>{
+    const rows=data.returns.filter(r=>state.returnStatus==='All statuses'||r.status===state.returnStatus);
+    return head('OPERATIONS / WAREHOUSE','Amazon Returns','A sample receipt queue with damage and exception workflows.')+
+    stats([['RECEIPTS','03','In demo'],['PENDING','01','Awaiting review'],['COMPLETED','01','Closed record']])+
+    `<section class="mpd-sheet"><div class="mpd-sheet-title"><strong>Warehouse receipts</strong><small>Fictional examples</small></div><div class="mpd-filter-row"><label>Status<select data-mpd-return-filter>${['All statuses','Pending review','In progress','Completed'].map(c=>`<option ${c===state.returnStatus?'selected':''}>${c}</option>`).join('')}</select></label></div><div class="mpd-table"><div class="mpd-table-head"><span>RECEIPT</span><span>REASON</span><span>STATUS</span><span></span></div>${rows.map(r=>`<button class="mpd-table-row" data-mpd-return="${r.id}" type="button"><span><b>${r.id}</b><small>${r.sku} · ${r.date}</small></span><span>${r.reason}</span><span>${pill(r.status)}</span><span class="mpd-row-arrow">→</span></button>`).join('')}</div></section>`;
+  };
+  const channels=()=>head('CONNECTIVITY / CHANNEL REGISTRY','Marketplaces','Four example connections, demonstrating the integration-first architecture.')+
+    `<div class="mpd-cards">${data.channels.map(c=>`<button type="button" class="mpd-market-card" data-mpd-market="${esc(c.name)}"><div><span class="mpd-channel-symbol">${c.name[0]}</span>${pill('Connected')}</div><h6>${esc(c.name)}</h6><p>${esc(c.type)}</p><footer><span>${c.units} sample units</span><b>View connection →</b></footer></button>`).join('')}</div>`;
+  const imports=()=>head('DATA / CONNECTIVITY','Data Imports','See how source files are normalised before feeding the product master.')+
+    `<div class="mpd-cards">${[['Website catalogue','Product detail / descriptions','Catalogue'],['Stock availability','Warehouse quantities / SKU','Stock'],['Marketplace sales','Units / channels / sales','Performance']].map(([title,desc,tag])=>`<div class="mpd-import-card"><span class="mpd-import-tag">${tag.toUpperCase()}</span><h6>${title}</h6><p>${desc}</p>${pill('Demo source')}</div>`).join('')}</div><section class="mpd-sheet mpd-sync"><strong>Preview the data flow</strong><p>Run a simulated import validation to see the mapping checks. Nothing is uploaded or connected.</p><button class="mpd-primary" type="button" data-mpd-sync>Run demo validation</button><div id="mpd-sync-result" role="status">${state.syncs?'✓ Demo validation complete · 3 example sources checked · 0 live records changed':''}</div></section>`;
+  const detailPage=()=>{
+    const d=state.detail;
+    if(!d) return '';
+    let title,subtitle,fields=[];
+    if(d.type==='product') {const p=data.products.find(x=>x.sku===d.id);if(!p)return '';title=p.name;subtitle=p.sku;fields=[['Product category',p.category],['Marketplace',p.channel],['Sample stock',p.stock+' units'],['Illustrative RRP',money(p.price)],['Listing',p.status]];}
+    if(d.type==='return') {const p=data.returns.find(x=>x.id===d.id);if(!p)return '';title='Receipt '+p.id;subtitle=p.date;fields=[['SKU',p.sku],['Units',String(p.qty)],['Reason',p.reason],['Status',p.status]];}
+    if(d.type==='rebate') {const p=data.rebates.find(x=>x.id===d.id);if(!p)return '';title='Deduction '+p.id;subtitle=p.date;fields=[['Category',p.category],['Illustrative amount',money(p.amount)],['Status',p.status]];}
+    if(d.type==='market') {const p=data.channels.find(x=>x.name===d.id);if(!p)return '';title=p.name;subtitle='Connection information';fields=[['Connection type',p.type],['Sample units',p.units],['Illustrative contribution',p.share+'%'],['Status','Demo connected']];}
+    return `<div class="mpd-detail"><button type="button" data-mpd-back class="mpd-back">← Back to ${esc(state.view==='products'?'Product Master':state.view==='rebates'?'Vendor Rebates':state.view==='returns'?'Amazon Returns':'Marketplaces')}</button><div class="mpd-detail-head"><span>RECORD DETAIL / FICTIONAL DATA</span><h5>${esc(title)}</h5><p>${esc(subtitle)}</p></div><div class="mpd-detail-card">${fields.map(([k,v])=>`<div><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join('')}</div><p class="mpd-detail-note">This is a product design demonstration. No live API, user account or employer data is accessed.</p></div>`;
+  };
+  const screens={overview,products,performance,rebates,returns,channels,imports};
+  function render(preserveScroll=false){
+    const oldTop=content.scrollTop;
+    const current=screens[state.view]||overview;
+    content.innerHTML=state.detail?detailPage():current();
+    if(preserveScroll)content.scrollTop=oldTop;else content.scrollTop=0;
+    const meta={overview:['Overview','Workspace overview'],products:['Products','Product Master'],performance:['Insights','Product Performance'],rebates:['Finance','Vendor Rebates'],returns:['Operations','Amazon Returns'],channels:['Connectivity','Marketplaces'],imports:['Connectivity','Data Imports']};
+    screen.querySelector('#mpd-crumb').textContent=meta[state.view][0];
+    screen.querySelector('#mpd-title').textContent=state.detail?'Record details':meta[state.view][1];
+    screen.querySelectorAll('[data-mpd-nav]').forEach(b=>{const active=b.dataset.mpdNav===state.view;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'page':'false')});
+  }
+  function navigate(view){if(!screens[view])return;state.view=view;state.detail=null;render();}
+  function showDetail(type,id){state.detail={type,id};render();}
+  screen.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b||!screen.contains(b))return;
+    if(b.dataset.mpdNav){navigate(b.dataset.mpdNav);return;}
+    if(b.dataset.mpdProduct){showDetail('product',b.dataset.mpdProduct);return;}
+    if(b.dataset.mpdReturn){showDetail('return',b.dataset.mpdReturn);return;}
+    if(b.dataset.mpdRebate){showDetail('rebate',b.dataset.mpdRebate);return;}
+    if(b.dataset.mpdMarket){showDetail('market',b.dataset.mpdMarket);return;}
+    if(b.hasAttribute('data-mpd-back')){state.detail=null;render();return;}
+    if(b.hasAttribute('data-mpd-sync')){state.syncs++;const result=screen.querySelector('#mpd-sync-result');if(result)result.textContent='✓ Demo validation complete · 3 sample sources checked · 0 live records changed';return;}
+  });
+  screen.addEventListener('input',e=>{
+    if(e.target.matches('[data-mpd-search]')){
+      state.query=e.target.value;
+      const selStart=e.target.selectionStart,selEnd=e.target.selectionEnd;
+      render(true);
+      const inp=screen.querySelector('[data-mpd-search]');if(inp){inp.focus();inp.setSelectionRange(selStart,selEnd);}
+    }
+  });
+  screen.addEventListener('change',e=>{
+    const el=e.target;
+    if(el.hasAttribute('data-mpd-channel'))state.channel=el.value;
+    else if(el.hasAttribute('data-mpd-period'))state.period=el.value;
+    else if(el.hasAttribute('data-mpd-rebate-filter'))state.rebateCategory=el.value;
+    else if(el.hasAttribute('data-mpd-return-filter'))state.returnStatus=el.value;
+    else return;
+    render(true);
+  });
+  render();
+})();
