@@ -492,3 +492,16 @@ skillAnchors.forEach(anchor=>anchor.addEventListener('click',()=>{
   js.defer=true;
   document.body.appendChild(js);
 })();
+
+/* FFN V12: interactive member and admin views, both with fictional sample records. */
+(function loadFfnDual(){
+  if(!document.getElementById('project-ffn'))return;
+  const css=document.createElement('link');
+  css.rel='stylesheet';
+  css.href='assets/ffn-dual.css?v=12';
+  document.head.appendChild(css);
+  const js=document.createElement('script');
+  js.src='assets/ffn-dual.js?v=12';
+  js.defer=true;
+  document.body.appendChild(js);
+})();
