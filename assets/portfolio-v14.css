@@ -21,3 +21,21 @@
 @media(max-width:760px){.role-fit{scroll-margin-top:63px;padding-top:44px;padding-bottom:45px}.role-fit-layout{display:block}.role-fit-tabs{display:flex;flex-direction:row;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:8px}.role-fit-tabs button{flex:0 0 auto;width:auto;min-height:47px;padding:12px 11px;white-space:nowrap}.role-fit-head{margin-bottom:20px}.role-fit-head h2{font-size:clamp(43px,12vw,68px)}.role-fit-head>p{font-size:13px}.role-fit-panel h3{font-size:26px}.fit-proof{grid-template-columns:1fr;gap:5px;padding:13px 0}.fit-proof p{grid-column:auto}.role-fit-share{flex-wrap:wrap;gap:3px}.role-fit-share button{padding:5px 0;text-align:left}}
 @media(max-width:430px){.role-fit-head h2{font-size:47px}.role-fit-panel{padding:23px 18px 0}.role-fit-share{padding:12px 18px}.role-fit-tabs button{font-size:11px;gap:7px}}
 @media(prefers-reduced-motion:reduce){.role-fit-tabs button{transition:none}}
+
+/* V15 — proven ecommerce credentials and direct professional contact */
+.hero-proof strong{font-size:17px;letter-spacing:-.02em;line-height:1.25}
+.hero-proof>div>span{font-size:11px;letter-spacing:.12em}
+.hero-proof small{font-size:12px;max-width:30ch}
+.career-list>div{row-gap:4px}
+.career-list>div>p{grid-column:2;margin:4px 0 0;font-size:12px;line-height:1.7;color:#656c79;max-width:66ch}
+.contact .contact-linkedin{background:#1e4ea1;color:#fff;gap:14px}
+.contact .contact-linkedin:hover{background:#2f65c0}
+.contact .contact-secondary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 19px;color:#eff3ff;font-size:13px;font-weight:700;border:1px solid #6e83af;border-radius:100px}
+.contact .contact-secondary:hover{background:#232c46}
+.contact .contact-honesty{color:#b2bdd7!important}
+.sidebar-linkedin{display:inline-block;color:#2448b8!important;font-weight:700;text-decoration:none}
+.sidebar-linkedin:hover{text-decoration:underline}
+.footer-linkedin{font-size:11px;font-weight:800;color:#b9ccff;text-decoration:none}
+.footer-linkedin:hover{color:#fff}
+@media(max-width:820px){.career-list>div{grid-template-columns:114px minmax(0,1fr)}.career-list>div>p{grid-column:2}}
+@media(max-width:560px){.hero-proof strong{font-size:17px}.career-list>div{grid-template-columns:1fr;row-gap:5px}.career-list>div>p,.career-list small{grid-column:1}.career-list>div>p{margin-top:3px}.contact .contact-secondary{min-height:47px}}

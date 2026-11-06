@@ -43,3 +43,11 @@ Change the copy in `index.html`, appearance in `assets/styles.css`, and interact
 - **Safety:** employer-specific MP Desk screenshots remain withheld. Images with members/figures still use fictional demo representations; no new personal contact details have been published.
 - **Recruitment conversion gap:** add an approved public email or LinkedIn profile to the Contact section and downloadable profile before treating the site as a completed recruiter-facing destination.
 - **Design inspiration:** categorisation and navigation from `f/prompts.chat`; editorial restraint from `alshedivat/al-folio` and `cobiwave/simplefolio`; anti-generic design principles from `heydamir/unslop`. Inspiration only, no source code or template copied.
+
+## V15: ecommerce leadership and recruiter contact
+- Reconciled career timeline to the latest supplied CV: Nemesis Now (Mar 2026-present), KhooCommerce (Jun 2025-Feb 2026), Director of Systems at Pyramid (Feb 2023-Jun 2025), Head of B2C & Digital Trading (Apr 2021-Feb 2023), and earlier roles.
+- Strengthened ecommerce credentials: led £3m+ B2C trading, grew sales by £1m+, built Shopify B2B/B2C stores, and owned merchandising, pricing, campaigns, customer service and fulfilment.
+- Expanded career examples to include DTC growth, Shopify/UX, and Amazon Vendor proof-of-collection automation alongside API/EDI and product work.
+- **Public contact is LinkedIn only:** https://www.linkedin.com/in/mike-palmer-677669a6/
+- Updated downloadable two-page CV from latest supplied copy and explicitly removed personal phone/email details from the public PDF.
+- Checked static layout at 1440, 800, 390 and 320px. Live browser/device testing remains separate.
