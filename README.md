@@ -35,3 +35,11 @@ Change the copy in `index.html`, appearance in `assets/styles.css`, and interact
 - MFFL: navy/red product section with a consistent laptop-style walkthrough, manually selectable screens and automatic transitions when in view.
 - MP Desk: dark graphite/amber product section with interactive Product Master, Performance and Vendor Rebates *representative interfaces*. All sample data are fictional; no real employer dashboards or financial figures are published.
 - The original FFN showcase remains unchanged. Both project sections retain their technical capability deep dives.
+
+## V14: recruiter-first discovery and performance
+- **Role-fit navigator:** four evidence pathways (ecommerce, operations/change, product/UX, and integration/data) with deep links to the corresponding case studies. The chosen view can be shared with a `?focus=commerce|change|product|integration#role-fit` URL.
+- **Faster initial HTML:** repeated embedded portrait images, older showcase images and the career-profile PDF are now separate cacheable assets. HTML reduced from ~1.3 MB to ~37 KB before transfer compression; this is a file-size reduction, not a verified Core Web Vitals result.
+- **Social and search:** a branded 1200×630 OG preview, canonical URL, Person structured data, sitemap and robots.txt.
+- **Safety:** employer-specific MP Desk screenshots remain withheld. Images with members/figures still use fictional demo representations; no new personal contact details have been published.
+- **Recruitment conversion gap:** add an approved public email or LinkedIn profile to the Contact section and downloadable profile before treating the site as a completed recruiter-facing destination.
+- **Design inspiration:** categorisation and navigation from `f/prompts.chat`; editorial restraint from `alshedivat/al-folio` and `cobiwave/simplefolio`; anti-generic design principles from `heydamir/unslop`. Inspiration only, no source code or template copied.
