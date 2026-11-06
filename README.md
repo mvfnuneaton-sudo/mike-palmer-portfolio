@@ -51,3 +51,10 @@ Change the copy in `index.html`, appearance in `assets/styles.css`, and interact
 - **Public contact is LinkedIn only:** https://www.linkedin.com/in/mike-palmer-677669a6/
 - Updated downloadable two-page CV from latest supplied copy and explicitly removed personal phone/email details from the public PDF.
 - Checked static layout at 1440, 800, 390 and 320px. Live browser/device testing remains separate.
+
+## V16 visual-first design pass
+- Shortened visible recruitment copy while retaining detail in native expandable panels.
+- Introduced three verified metric cards, an illustrated four-discipline overview, icon-led delivery steps, and a visual integration-flow diagram.
+- Added responsive project capability ribbons and a bento-style grid for nine career examples.
+- Preserved existing FFN, MFFL and MP Desk interactive demos and LinkedIn contact links.
+- Checked static responsive layout at 1440, 1024, 768, 390 and 320px with no document horizontal overflow. Existing dynamic demo interactions should be checked after deployment.

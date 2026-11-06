@@ -1,0 +1,206 @@
+/* V16 — visual-first professional portfolio: earned colour, meaningful graphics, less prose. */
+.v16-icon{display:block;width:22px;height:22px;flex-shrink:0;stroke:currentColor;fill:none}
+.v16-sprite{pointer-events:none}
+
+/* Above the fold: make verified outcomes immediately legible. */
+.hero-proof.v16-impact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;border:0;margin-top:24px}
+.hero-proof.v16-impact-grid .v16-impact-card{min-width:0;padding:19px 19px 17px;border:1px solid #dde2eb;border-top:3px solid #2746b5;background:#f5f7fb;display:flex;flex-direction:column}
+.hero-proof.v16-impact-grid .v16-impact-card:nth-child(2){border-top-color:#de573d;background:#fbf7f2}
+.hero-proof.v16-impact-grid .v16-impact-card:nth-child(3){border-top-color:#1b8981;background:#f2f8f6}
+.v16-impact-top{display:flex;justify-content:space-between;gap:7px;align-items:center;color:#304da1}
+.v16-impact-card:nth-child(2) .v16-impact-top{color:#c25430}.v16-impact-card:nth-child(3) .v16-impact-top{color:#14786c}
+.hero-proof.v16-impact-grid .v16-impact-top>span{display:block;margin:0;color:#687384;font-size:9px;font-weight:800;letter-spacing:.1em;text-align:right}
+.v16-impact-value{margin:10px 0 2px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(51px,5.2vw,77px);font-weight:800;line-height:.88;letter-spacing:-.017em;color:#19223e}
+.v16-impact-value small{font:inherit;display:inline!important;color:#2746b5;margin:0!important}
+.hero-proof.v16-impact-grid .v16-impact-card:nth-child(2) .v16-impact-value small{color:#df593b}
+.hero-proof.v16-impact-grid .v16-impact-card:nth-child(3) .v16-impact-value small{color:#188d82}
+.hero-proof.v16-impact-grid .v16-impact-card strong{font-size:12px;font-weight:800;letter-spacing:.045em;color:#252b37;margin-top:14px;line-height:1.3}
+.v16-impact-card p{font-size:11px;line-height:1.55;color:#606b7b;margin:6px 0 0}
+
+/* A capabilities illustration, not another long skills list. */
+.v16-capability-chapter{background:#101827;color:white;padding-top:72px;padding-bottom:76px;scroll-margin-top:20px;overflow:hidden}
+.v16-capability-header{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(220px,.55fr);align-items:end;gap:32px;margin-bottom:34px}
+.v16-capability-header .section-label{color:#b4c0e3}
+.v16-capability-header h2{font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(48px,5.1vw,78px);line-height:.91;font-weight:800;letter-spacing:.005em;margin:18px 0 0;color:#f8f8f7}
+.v16-capability-header h2 em{font-style:normal;color:#7fa0ff}
+.v16-capability-header>p{color:#c1c9d8;font-size:15px;line-height:1.6;margin:0 0 4px;max-width:32ch}
+.v16-capability-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.v16-cap-tile{min-width:0;min-height:270px;display:flex;flex-direction:column;align-items:flex-start;padding:23px 21px 20px;border:1px solid #36445d;color:white;text-decoration:none;position:relative;transition:background .18s,border-color .18s,transform .18s}
+.v16-cap-tile:hover{border-color:#98a8cb;background:#1c2b44;transform:translateY(-3px)}
+.v16-cap-tile:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.v16-cap-icon{width:56px;height:56px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#a6baf8;background:rgba(255,255,255,.05);margin-bottom:25px}
+.v16-cap-icon .v16-icon{width:29px;height:29px}
+.v16-cap-num{font-size:10px;letter-spacing:.12em;color:#94a7c9;font-weight:800}
+.v16-cap-tile h3{font-family:'Barlow Condensed',Impact,sans-serif;font-size:31px;line-height:1.05;font-weight:700;margin:7px 0 8px;letter-spacing:.005em;color:#fff}
+.v16-cap-tile p{font-size:12px;line-height:1.55;color:#c8d2e3;margin:0 0 24px}
+.v16-cap-link{font-size:11px;font-weight:800;color:#d8e2ff;letter-spacing:.01em;margin-top:auto}
+.tile-commerce{background:#1f2d48}.tile-commerce .v16-cap-icon{color:#98b5ff}
+.tile-technology{background:#1b3138}.tile-technology .v16-cap-icon{color:#70d6c7}
+.tile-product{background:#3c2536}.tile-product .v16-cap-icon{color:#f39daf}
+.tile-people{background:#3a3029}.tile-people .v16-cap-icon{color:#ffcf8d}
+
+/* Smaller, purposeful icons punctuate the role-finder, not stock illustrations. */
+.role-fit-tabs button .v16-tab-icon{width:19px;height:19px;opacity:.8;flex:0 0 19px}
+.role-fit-tabs button[aria-selected="true"] .v16-tab-icon{opacity:1;color:#d5483d}
+.role-fit-panel h3{margin-bottom:15px}
+.fit-proof{padding:12px 0}.fit-proof p{line-height:1.5}
+
+/* Illustrated change method. */
+#approach .process{border-top:0;border-bottom:0;gap:10px}
+#approach .process-step,#approach .process-step:not(:first-child){background:#fff;border:1px solid #dededb;padding:21px 19px;position:relative;min-height:236px}
+#approach .process-step::before{content:'';position:absolute;left:0;top:0;width:100%;height:3px;background:#2749be}
+#approach .process-step:nth-child(2)::before{background:#1b877c}
+#approach .process-step:nth-child(3)::before{background:#d35e40}
+#approach .process-step:nth-child(4)::before{background:#4f4899}
+#approach .v16-process-icon{width:29px;height:29px;color:#2949b8;margin-bottom:22px}
+#approach .process-step:nth-child(2) .v16-process-icon{color:#1b877c}
+#approach .process-step:nth-child(3) .v16-process-icon{color:#d35e40}
+#approach .process-step:nth-child(4) .v16-process-icon{color:#4f4899}
+#approach .process-step>span{font-size:12px;letter-spacing:.12em;font-family:'DM Sans',Arial,sans-serif;color:#777f91;font-weight:800;margin-bottom:9px}
+#approach .process-step h3{font-size:19px;line-height:1.22;margin-bottom:10px}
+#approach .process-step p{font-size:12px;line-height:1.6}
+
+/* Career details remain searchable but not all visible at once. */
+.v16-role-detail{grid-column:2;margin-top:1px;padding:0;border:0}
+.v16-role-detail summary{font-size:11px;font-weight:800;color:#294bac;cursor:pointer;padding:5px 0 3px;list-style:none;display:inline-flex;gap:7px;align-items:center}
+.v16-role-detail summary::-webkit-details-marker{display:none}
+.v16-role-detail summary>span{font-size:16px;line-height:1;color:#2952b8}
+.v16-role-detail[open] summary>span{transform:rotate(45deg)}
+.v16-role-detail p{font-size:12px;color:#586475;line-height:1.65;margin:6px 0 8px;max-width:60ch}
+#experience .career-list>div{padding:14px 0}
+#experience .career-list>div>p{margin-top:0;line-height:1.45;color:#505b6d}
+
+/* Editorial evidence cards: a measured bento rhythm, with 100% real claims. */
+#experience .achievement-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#experience .achievement-grid .v16-evidence-card{min-height:245px;padding:20px 20px 17px;gap:0;border:1px solid #dce2ea;border-top:0;background:#f6f8fb;transition:box-shadow .17s,transform .17s}
+#experience .achievement-grid .v16-evidence-card:hover{box-shadow:0 13px 23px rgba(15,28,60,.08);transform:translateY(-2px)}
+.v16-evidence-mark{display:flex;align-items:center;justify-content:space-between;color:#3450a9;margin:0 0 15px}
+.v16-evidence-mark .v16-icon{width:27px;height:27px}
+.v16-evidence-mark>span{font-family:'Barlow Condensed',sans-serif;font-size:29px;color:#b2bdce;letter-spacing:.025em;font-weight:700}
+#experience .v16-evidence-card .achievement-overline{font-size:9px;color:#536ba5;letter-spacing:.11em}
+#experience .v16-evidence-card h3{font-size:clamp(19px,1.65vw,23px);line-height:1.16;margin:10px 0 9px}
+#experience .v16-evidence-card>p{font-size:12px;line-height:1.5;margin:0 0 16px;color:#4b5260}
+#experience .v16-evidence-card details{margin-bottom:12px;padding-top:9px}
+#experience .v16-evidence-card .achievement-tags span{font-size:9px;padding:4px 6px}
+#experience .achievement-grid .v16-feature-evidence{grid-column:span 2;background:#172344;border-color:#172344;color:white}
+#experience .v16-feature-evidence:nth-child(5){background:#f7ece7;border-color:#f0d8cb;color:#2b2528}
+#experience .v16-feature-evidence:nth-child(9){background:#eaf4f2;border-color:#cbe5df;color:#142b29}
+#experience .v16-feature-evidence .v16-evidence-mark{color:#a2b8ff}
+#experience .v16-feature-evidence .v16-evidence-mark>span{color:rgba(255,255,255,.35)}
+#experience .v16-feature-evidence .achievement-overline{color:#bccaff}
+#experience .v16-feature-evidence h3{font-size:clamp(24px,2.4vw,32px);max-width:24ch}
+#experience .v16-feature-evidence>p{font-size:13px;max-width:50ch;color:#dee8f6}
+#experience .v16-feature-evidence details{border-color:rgba(255,255,255,.23)}
+#experience .v16-feature-evidence details summary{color:#d9e5ff}
+#experience .v16-feature-evidence details p{color:#ccd6e9}
+#experience .v16-feature-evidence .achievement-tags span{background:rgba(255,255,255,.11);color:#edf3ff;border-color:rgba(255,255,255,.17)}
+#experience .v16-feature-evidence:nth-child(5) .v16-evidence-mark,#experience .v16-feature-evidence:nth-child(5) .achievement-overline{color:#aa4e42}
+#experience .v16-feature-evidence:nth-child(5) .v16-evidence-mark>span{color:#ceaaa0}
+#experience .v16-feature-evidence:nth-child(9) .v16-evidence-mark,#experience .v16-feature-evidence:nth-child(9) .achievement-overline{color:#237769}
+#experience .v16-feature-evidence:nth-child(9) .v16-evidence-mark>span{color:#94b9b1}
+#experience .v16-feature-evidence:nth-child(5)>p,#experience .v16-feature-evidence:nth-child(9)>p{color:#4d5a5a}
+#experience .v16-feature-evidence:nth-child(5) details,#experience .v16-feature-evidence:nth-child(9) details{border-color:#d5c9c2}
+#experience .v16-feature-evidence:nth-child(5) details summary,#experience .v16-feature-evidence:nth-child(9) details summary{color:#2549a2}
+#experience .v16-feature-evidence:nth-child(5) details p,#experience .v16-feature-evidence:nth-child(9) details p{color:#495968}
+#experience .v16-feature-evidence:nth-child(5) .achievement-tags span,#experience .v16-feature-evidence:nth-child(9) .achievement-tags span{background:#fff;color:#4f5967;border-color:#d8dce0}
+
+/* Illustrated system flow in place of the previous five text columns. */
+.integration-band{background:linear-gradient(124deg,#111b37,#182545);padding:35px 30px 26px}
+.v16-system-head{display:flex;justify-content:space-between;gap:22px;align-items:start;margin-bottom:25px}
+.v16-system-label{color:#adbfec;font-size:10px;letter-spacing:.15em;font-weight:800;margin:6px 0 12px}
+.v16-system-head h3{font-family:'Barlow Condensed',sans-serif;color:#fff;font-size:clamp(29px,3vw,42px);font-weight:800;line-height:.98;margin:0}
+.v16-system-head h3 em{font-style:normal;color:#88afff}
+.v16-system-grid{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr) 30px minmax(0,1fr);align-items:stretch;gap:6px}
+.v16-system-node{border:1px solid #344563;background:rgba(255,255,255,.045);padding:19px 15px 17px;min-width:0}
+.v16-system-middle{background:rgba(105,158,255,.105);border-color:#5074a3}
+.v16-system-node-top{display:flex;justify-content:space-between;gap:10px;align-items:start;color:#a8c6ff;margin-bottom:20px}
+.v16-system-node-top>span{font-size:9px;font-weight:800;letter-spacing:.12em;text-align:right;line-height:1.3;color:#b6c6dd}
+.v16-system-node strong{display:block;font-size:17px;line-height:1.2;color:#fff;margin-bottom:14px}
+.v16-system-chips{display:flex;gap:5px;flex-wrap:wrap}
+.v16-system-chips span{font-size:10px;padding:5px 7px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.045);color:#dfe7f7}
+.v16-system-bridge{display:flex;align-items:center;justify-content:center;color:#8cb3f5;font-size:27px;font-family:'Barlow Condensed',sans-serif}
+.v16-system-caption{font-size:10px;line-height:1.5;color:#a5b6d1;margin:17px 0 0}
+
+/* Project technique labels: small and consistent, each case owns its palette. */
+.v16-project-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #e6e9ed;border-bottom:1px solid #e6e9ed;background:#f4f6f9}
+.v16-project-skill{min-width:0;padding:15px 15px;display:flex;align-items:center;gap:10px;color:#213660;border-right:1px solid #e0e4ed}
+.v16-project-skill:last-child{border-right:0}
+.v16-project-skill .v16-icon{width:23px;height:23px;stroke-width:1.5}
+.v16-project-skill b{font-size:10px;font-weight:800;line-height:1.3;letter-spacing:.045em}
+.case-ffn .v16-project-skills{background:#22191f;border-color:#51424b}
+.case-ffn .v16-project-skill{color:#ff90a0;border-color:#51424b}
+.case-mffl .v16-project-skills{background:#ececf9;border-color:#c9cce9}
+.case-mffl .v16-project-skill{color:#343189;border-color:#ccd0eb}
+.case-mpdesk .v16-project-skills{background:#fff5e8;border-color:#efddc8}
+.case-mpdesk .v16-project-skill{color:#b66b13;border-color:#efdfc9}
+
+@media(max-width:1100px){
+ .v16-capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .v16-cap-tile{min-height:220px}
+ .v16-capability-header{grid-template-columns:1fr;gap:12px}
+ .v16-capability-header>p{max-width:48ch}
+ #experience .achievement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #experience .achievement-grid .v16-feature-evidence{grid-column:span 2}
+ .v16-project-skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .v16-project-skill:nth-child(2){border-right:0}
+ .v16-project-skill:nth-child(-n+2){border-bottom:1px solid #dedfe4}
+}
+@media(max-width:760px){
+ .hero-proof.v16-impact-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .hero-proof.v16-impact-grid .v16-impact-card{padding:12px 10px}
+ .v16-impact-value{font-size:43px}
+ .v16-impact-top .v16-icon{width:18px;height:18px}
+ .hero-proof.v16-impact-grid .v16-impact-top>span{display:none}
+ .hero-proof.v16-impact-grid .v16-impact-card strong{font-size:9px;line-height:1.28;margin-top:10px}
+ .v16-impact-card p{font-size:10px;line-height:1.4}
+ .v16-capability-chapter{padding-top:49px;padding-bottom:54px;scroll-margin-top:63px}
+ .v16-capability-header h2{font-size:clamp(44px,10vw,69px)}
+ .v16-capability-header>p{font-size:13px}
+ #approach .process{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #approach .process-step,#approach .process-step:not(:first-child){min-height:205px}
+ .v16-system-grid{grid-template-columns:1fr;gap:9px}
+ .v16-system-bridge{height:16px;transform:rotate(90deg)}
+ .v16-system-head h3{font-size:39px}
+ .v16-system-node{padding:16px}
+ .v16-system-node-top{margin-bottom:12px}
+}
+@media(max-width:560px){
+ .v16-capability-grid{grid-template-columns:1fr 1fr;gap:8px}
+ .v16-cap-tile{padding:15px 13px;min-height:245px}
+ .v16-cap-icon{width:45px;height:45px;margin-bottom:19px}
+ .v16-cap-icon .v16-icon{width:23px;height:23px}
+ .v16-cap-tile h3{font-size:26px}
+ .v16-cap-tile p{font-size:11px}
+ .v16-cap-num{font-size:9px}
+ .v16-cap-link{font-size:10px}
+ .v16-role-detail{grid-column:1}
+ #experience .achievement-grid{grid-template-columns:1fr}
+ #experience .achievement-grid .v16-feature-evidence{grid-column:auto}
+ #experience .achievement-grid .v16-evidence-card{min-height:0;padding:18px}
+ .v16-evidence-mark{margin-bottom:10px}
+ #experience .v16-evidence-card h3{font-size:24px}
+ #experience .v16-feature-evidence h3{font-size:29px}
+ .v16-project-skills{grid-template-columns:1fr 1fr}
+ .v16-project-skill{padding:13px 10px;gap:7px}
+ .v16-project-skill .v16-icon{width:18px;height:18px}
+ .v16-project-skill b{font-size:9px;letter-spacing:0}
+ #approach .process-step,#approach .process-step:not(:first-child){padding:16px 13px;min-height:208px}
+ #approach .process-step h3{font-size:17px}
+ #approach .process-step p{font-size:11px}
+ #approach .v16-process-icon{width:25px;height:25px;margin-bottom:17px}
+}
+@media(max-width:360px){
+ .hero-proof.v16-impact-grid{gap:4px}
+ .hero-proof.v16-impact-grid .v16-impact-card{padding:10px 7px}
+ .v16-impact-value{font-size:38px}
+ .v16-cap-tile{min-height:254px;padding:14px 11px}
+ .v16-cap-tile h3{font-size:23px}
+ .v16-capability-header h2{font-size:44px}
+}
+@media(prefers-reduced-motion:reduce){.v16-cap-tile,#experience .achievement-grid .v16-evidence-card{transition:none}.v16-cap-tile:hover,#experience .achievement-grid .v16-evidence-card:hover{transform:none}}
+/* Correct an older experience-grid specificity collision at phone widths. */
+@media(max-width:560px){
+ #experience .experience-intro .career-list>div{grid-template-columns:minmax(0,1fr)!important;row-gap:5px}
+ #experience .career-list>div>span,#experience .career-list>div>strong,#experience .career-list>div>small,#experience .career-list>div>p,#experience .career-list>div>.v16-role-detail{grid-column:1!important}
+ #experience .career-list>div>p{max-width:none}
+}
